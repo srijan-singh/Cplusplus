@@ -5,6 +5,11 @@
         "new": "cpp",
         "array": "cpp",
         "string": "cpp",
-        "string_view": "cpp"
-    }
+        "string_view": "cpp",
+        "iosfwd": "cpp",
+        "limits": "cpp"
+    },
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "json.schemaDownload.enable": false,
+    "telemetry.enableCrashReporter": false
 }
