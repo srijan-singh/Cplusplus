@@ -1,3 +1,0 @@
-C:/Users/Srijanverse/Documents/Workspace/C++/Programmes/cmake-build-debug/CMakeFiles/Programmes.dir
-C:/Users/Srijanverse/Documents/Workspace/C++/Programmes/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Srijanverse/Documents/Workspace/C++/Programmes/cmake-build-debug/CMakeFiles/rebuild_cache.dir

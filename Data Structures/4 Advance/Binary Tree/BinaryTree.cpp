@@ -202,10 +202,10 @@ class BinaryTree
 int main()
 {
     BinaryTree b;
+
     b.append(1);
     b.append(2);
     b.append(3);
-    
     b.append(4);
     b.append(5);
     
