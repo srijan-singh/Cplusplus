@@ -11,5 +11,6 @@
     },
     "workbench.settings.enableNaturalLanguageSearch": false,
     "json.schemaDownload.enable": false,
-    "telemetry.enableCrashReporter": false
+    "telemetry.enableCrashReporter": false,
+    "C_Cpp.errorSquiggles": "Enabled"
 }

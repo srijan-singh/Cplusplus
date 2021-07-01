@@ -22,7 +22,7 @@ int *sort(int *arr, int low, int high)
     {
         if(arr[i+1] < arr[i])
         {
-            arr = insertion_sort(arr,i+1);
+            arr = insertion_sort(arr,i+1); // Used Insertion Sort to sort the divided array
         }
     }    
     return arr;
@@ -35,13 +35,23 @@ int *merge_sort(int *arr, int length, int index=2)
         return arr;
     }
 
-    //The Sorting Starts from leaf node.
+    // The range is defined by index.
+  
+  /*
+    If array has 8 elements:  ********
+    It will start sorting until it's less than length of array.
+    1st call  2*1 elements max: ** ** ** ** // Called from Main Function
+    2nd call  2*2 elements max: **** ****
+    3rd call  2*3 elements max: ********
+    Returns Array
+  */
     
     for(int i=0; (i+index)<=length; i+=index) // Merging and Sorting
     {
         sort(arr, i, i+index);
     }
-
+    
+    // The range will increase exponentially
     return merge_sort(arr, length, index*2);
 }
 

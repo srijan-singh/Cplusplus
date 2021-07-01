@@ -7,6 +7,70 @@ using std::string;
 using std::cin;
 using std::cout;
 
+class UserDetails
+{
+    string firstName;
+    string lastName;
+    string country;
+    int age;
+    int pincode;
+    int mobile;
+
+    public:
+
+    void get_data()
+    {
+        cout<<"\n\tForm\n";
+
+        cout<<"\nFirst Name: ";
+        cin>>firstName;
+        cout<<"\nLast Name: ";
+        cin>>lastName;
+
+        cout<<"\nAge: ";
+        cin>>age;
+
+        cout<<"\nCountry: ";
+        cin>>country;
+        cout<<"\nPin Code: ";
+        cin>>pincode;
+
+        cout<<"\nMobile: ";
+        cin>>mobile;
+
+        return;
+    }
+
+    void show_data()
+    {
+        cout<<"\n\tUser Details\n";
+
+        cout<<"\nFirst Name: \t";
+        cout<<firstName;
+        cout<<"\nLast Name:  \t";
+        cout<<lastName;
+
+        cout<<"\nAge:        \t";
+        cout<<age;
+
+        cout<<"\nCountry:    \t";
+        cout<<country;
+        cout<<"\nPin Code:   \t";
+        cout<<pincode;
+
+        cout<<"\nMobile:     \t";
+        cout<<mobile;
+        
+        return;
+    }
+
+    void update_data()
+    {
+        std::cout<<"\nTODO";
+    }
+
+};
+
 class Registration
 {
     string username;
@@ -15,6 +79,12 @@ class Registration
     public:
 
     map<string, string> database;
+
+    Registration()
+    {
+        // Default User
+        database["abc"] = "123";
+    }
 
     void sign_up()
     {
@@ -55,8 +125,9 @@ class Login : public Registration
             {
                 if (input_password == key->second)
                 {  
-                    std::cout<<"\nSuccess: Logged in!\n";                  
-                    return true;
+                    std::cout<<"\nSuccess: Logged in!\n";  
+                    
+                    return true;                
                 }
                 else
                 {
@@ -65,43 +136,92 @@ class Login : public Registration
             }           
         }
         std::cout<<"\nError: Username Not Found\n";
-
+        
         return false;
-    }
-
-    
+    }   
 };
 
-class RegisteredUser : public Login
+class Features
 {
     public:
 
-    void psudo_function()
-    {
+    void user_data()
+    {       
+            UserDetails data;
+            int input;
 
-        if (sign_in() == true)
-        {
-            std::cout<<"\nWelcome back you have 7 new noifications!\n";
-        }
-        else
-        {
-            std::cout<<"\nUse 1: To Register: ";
-            int value;
-            std::cin>>value;
-            
-            if (value == 1)
+            do
             {
-                sign_up();
-                psudo_function();
-            }
-        }
-    }
-    
+                cout<<"\nUse 1: Edit Profile\n";
+                cout<<"\nUse 2: See Profile\n";
+                cout<<"\nUse 0: To Log Out\n";
+                               
+                cin>>input;
+
+                switch (input)
+                {
+                
+                case 0:
+                    std::cout<<"Bye!";
+                    break;
+                
+                case 1:
+                    data.get_data();
+                    break;
+                
+                case 2:
+                    data.show_data();
+                    break;
+                
+                default:
+                    cout<<"\nError: Invalid Input";
+                    break;
+                }
+            }while (input != 0);
+        
+        return;
+    }    
 };
 
 int main()
 {
-    RegisteredUser server;
-    server.psudo_function();
+    Login server;
+    Features feat;
+
+    int input;
+    do
+    {       
+        cout<<"\nUse 1: Sign Up\n";
+        cout<<"\nUse 2: Sign In\n";
+        cout<<"\nUse 0: To Exit\n";
+        
+        cin>>input;
+
+        switch (input)
+        {
+        
+        case 0:
+            std::cout<<"Bye!";
+            break;
+        
+        case 1:
+            server.sign_up();
+            break;
+        
+        case 2:
+            if (server.sign_in() == true)
+            {
+                feat.user_data();
+            }
+            break;
+        
+
+        default:
+            cout<<"\nError: Invalid Input";
+            break;
+        }
+    }
+    while (input != 0);
+
     return 0;
 }
