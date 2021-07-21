@@ -1,16 +1,12 @@
 #include <iostream>
 
-using std::endl;
-using std::cin;
-using std::cout;
-
-void display(int arr[], int length)
+void display(int arr[], int lenght)
 {
-  for(int i=0; i<length; i++)
+  for(int i=0; i<lenght; i++)
   {
-    cout<<arr[i]<<" ";
+    std::cout<<arr[i]<<" ";
   }
-  cout<<endl;
+  std::cout<<"\n";
 }
 
 void merge(int arr[], int start, int mid, int end)
@@ -19,9 +15,9 @@ void merge(int arr[], int start, int mid, int end)
 
   int temp[length];
 
-  int index = 0, left = start, right = mid+1;
+  int left = start, right = mid + 1, index = 0;
 
-  while(left<=mid and right<=end)
+  while (left<=mid and right<=end)
   {
     if(arr[left] <= arr[right])
     {
@@ -45,15 +41,16 @@ void merge(int arr[], int start, int mid, int end)
 
   for(int i=start; i<=end; i++)
   {
-    arr[i] = temp[i-start];
+    arr[i] = temp[i - start];
   }
+  
 }
 
 void mergeSort(int arr[], int start, int end)
 {
-  if (start<end)
+  if(start < end)
   {
-    int mid = (start+end)/2;
+    int mid = (start + end)/2;
     mergeSort(arr, start, mid);
     mergeSort(arr, mid+1, end);
     merge(arr, start, mid, end);
@@ -63,22 +60,25 @@ void mergeSort(int arr[], int start, int end)
 int main()
 {
   int length;
-  cout<<"Length of the Array: ";
-  cin>>length;
+
+  std::cout<<"Enter length of the array: ";
+  std::cin>>length;
 
   int arr[length];
+
   for(int i=0; i<length; i++)
   {
-    cout<<"Enter Element "<<(i+1)<<" : ";
-    cin>>arr[i];
+    std::cout<<"Enter Element "<<(i+1)<<" : ";
+    std::cin>>arr[i];
   }
 
-  cout<<"Given Array: ";
+  std::cout<<"Given Array : ";
   display(arr, length);
 
   mergeSort(arr, 0, length-1);
 
-  cout<<"Sorted Array: ";
+  std::cout<<"Sorted Array : ";
   display(arr, length);
+
   return 0;
 }
