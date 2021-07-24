@@ -1,37 +1,49 @@
-//Memoization
 #include <iostream>
 
-//Intializaton memo to store the repeating value
-int *memo;
+using std::cout;
 
-int fibiaonic(int value, int *memo)
-{
-    // Base Value/Termination Condition
-    if(value<=1)
-    {
-        return 1;
-    }
-    //If Value is in Memo
-    if(memo[value] != -1)
-    {
-        return memo[value];
-    }
-    //If Value isn't in Memo
-    memo[value] = fibiaonic(value-1, memo) + fibiaonic(value-2, memo);
+class Fibonaci {
 
-    return memo[value];
-}
+  int * memo;
+    
+public:
+    
+    int getFibNumber(int n) {
+
+      memo = new int[n+1];
+      return fib_memo(n, memo);
+
+    }
+
+    int fib_memo(int n, int memo[])
+    {
+      if (n==0 or n==1)
+      {
+        return n;
+      }
+
+      for(int i=0; i<n; i++)
+      {
+        if(n==memo[i])
+        {
+          return memo[n];
+        }
+      }
+
+      memo[n] = fib_memo(n-1, memo) + fib_memo(n-2, memo);
+
+      return memo[n];
+    }
+};
+
 
 int main()
 {
-    int n;
-    std::cin>>n;
-    // Dynamic Array
-    memo = (int*)malloc(sizeof(int));
-    //Initialization all Value as -1
-    for(int i=0; i<n; i++)
-    {
-        memo[i] = -1;
-    }
-    std::cout<<fibiaonic(n,memo);
+  Fibonaci s;
+
+  cout<<s.getFibNumber(8)<<"\n";
+  cout<<s.getFibNumber(9)<<"\n";
+  cout<<s.getFibNumber(10)<<"\n";
+
+  return 0;
 }

@@ -1,91 +1,74 @@
-#include<iostream>
+#include <iostream>
 
-void print(int *, int);
+using std::endl;
+using std::cin;
+using std::cout;
 
-bool isSorted(int *arr, int high, int low=0)
+void display(int arr[], int length, int low=0)
 {
-    for(int i=low; (i+1)<high; i++)
-    {
-        if(arr[i] > arr[i+1])
-        {
-            return false;
-        }
-    }
-    return true;
+  for(int i=low; i<length; i++)
+  {
+    cout<<arr[i]<<" ";
+  }
+  cout<<endl;
 }
 
-void pivotPositioning(int *arr, int high, int low)
+void swap(int *num1, int *num2)
 {
-    for(int i=low; (i+1)<high; i++)
-    {
-        if(arr[i] > arr[i+1])
-        {
-            int temp = arr[i];
-            arr[i] = arr[i+1];
-            arr[i+1] = temp;
-        }
-    }
+  int temp = *num1;
+  *num1 = *num2;
+  *num2 = temp;
 }
 
-void quickSort(int *arr, int length, int pivot) 
+int partition(int arr[], int start, int end)
 {
-    pivotPositioning(arr, pivot+1, 0);
-    //print(arr, length);
-    pivotPositioning(arr, length, pivot);
-    //print(arr, length);
+  int pivot = arr[end];
+
+  int initial = start-1;
+
+  for (int i=start; i<=end-1; i++)
+  {
+    if(arr[i] < pivot)
+    {
+      swap(&arr[++initial], &arr[i]);
+    }
+  }
+
+  //Position Pivot
+  swap(&arr[++initial], &arr[end]);
+
+  return initial;
 }
 
-int *quickSort(int *arr, int length)
+void quickSort(int arr[], int start, int end)
 {
-    int pivot = length/2;
-
-    quickSort(arr, length, pivot);
-
-    if (isSorted(arr, length) == false)
-    {
-        while (pivot > 0)
-        {
-            pivot--;
-            quickSort(arr, length, pivot);
-        }   
-
-        while (pivot<length)
-        {
-            pivot++;
-            quickSort(arr, length, pivot);
-        }
-        
-    }
-
-    return arr;
+  if(start<end)
+  {
+    int pivot_index = partition(arr, start, end);
+    quickSort(arr, start, --pivot_index);
+    quickSort(arr, ++pivot_index, end);
+  }
 }
 
 int main()
 {
-    int length ;
-    std::cout<<"Enter length of the array: ";
-    std::cin>>length;
+  int length;
+  cout<<"Length of the Array: ";
+  cin>>length;
 
-    int arr[length] ;
-    for(int i=0; i<length; i++)
-    {
-        std::cout<<"Enter Element "<<(i+1)<<" : ";
-        std::cin>>arr[i];
-    }
+  int arr[length];
+  for(int i=0; i<length; i++)
+  {
+    cout<<"Enter Element "<<(i+1)<<" : ";
+    cin>>arr[i];
+  }
 
-    quickSort(arr, length);
+  cout<<"Given Array: ";
+  display(arr, length);
 
-    print(arr, length);
+  quickSort(arr, 0, length-1);
 
-    return 0;
-}
-
-void print(int *arr, int length)
-{
-    std::cout<<"Sorted Array: ";
-    for(int i=0; i<length; i++)
-    {
-        std::cout<<arr[i]<<" ";
-    }
-    std::cout<<"\n";
+  cout<<"Sorted Array: ";
+  display(arr, length);
+  return 0;
 }
