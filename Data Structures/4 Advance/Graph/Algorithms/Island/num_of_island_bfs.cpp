@@ -2,66 +2,60 @@
 #include<unordered_map>
 #include<unordered_set>
 #include<vector>
+#include<queue>
 
-using std::unordered_map;
-using std::unordered_set;
-using std::vector;
+using std::unordered_map;   // Hashtable
+using std::unordered_set;   // Hashtable
+using std::vector;          // Dynamic Array
+using std::queue;
 
-using std::string;
-using std::to_string;
+using std::string;          
 using std::cout;
-using std::endl;
 
-typedef unordered_map<string ,vector<string>> Graph;
+typedef unordered_map< string, vector<string> > Graph;
 typedef unordered_set<string> Set;
-typedef vector<vector<string>> Edge;
+typedef vector < vector<string> > Edge;
 
-void print(Graph);
+void print(Graph graph);
 
-Graph get_graph(Edge);
+Graph get_graph(Edge edges);
 
-int dfs(Graph graph, string source, Set visited)
+int bfs(Graph graph, Set base_node)
 {
-    if(visited.find(source) != visited.end())
-    {
-        cout<<source<<endl;
-        visited.insert(source);
+    queue <string> queue;
 
-        for(auto neighbour : graph[source])
+    for(auto node : graph)
+    {
+        string source = node.first;
+
+        if(base_node.find(source) == base_node.end())
         {
-            return dfs(graph, neighbour, visited);
+            queue.push(source);
         }
+
+        while (!queue.empty())
+        {
+            string current = queue.front();
+            queue.pop();
+
+            for(auto neighbour : graph[current])
+            {
+                base_node.insert(neighbour);
+            }
+        }        
     }
-    return visited.size();   
+
+    return base_node.size();
 }
 
 int num_island(Edge edges)
 {
-    Set visited;
     Graph graph = get_graph(edges);
-    int size = 0;
-    
-    for(auto node: graph)
-    {
-        //cout<<visited.size()<<endl;
-        size = dfs(graph, node.first, visited);
-    }
-
-    return size;
+    Set base_node;
+    //print(graph);
+    return bfs(graph, base_node);
 }
 
-int set_size(Set set, int count=0)
-{
-    if(set.size()>4)
-    {
-        return set.size();
-    }
-
-    string input = to_string(count);
-    set.insert(input);
-    
-    return set_size(set, ++count);
-}
 int main()
 {
     Edge edge = {
@@ -82,21 +76,19 @@ int main()
         //{"z", "y"}
     };
 
-    Set set;
-
-    //cout<<set_size(set);
-
     cout<<num_island(edge);
+
     return 0;
 }
 
 Graph get_graph(Edge edges)
 {
     Graph graph;
-    for(auto edge : edges)
+
+    for (auto edge : edges)
     {
         string a = edge[0], b = edge[1];
-
+        
         if(graph.find(a) == graph.end())
         {
             graph[a];
@@ -109,7 +101,6 @@ Graph get_graph(Edge edges)
 
         graph[a].push_back(b);
         graph[b].push_back(a);
-
     }
     return graph;
 }
@@ -118,13 +109,12 @@ void print(Graph graph)
 {
     for(auto node : graph)
     {
-        cout<<"Node: "<<node.first<<" Neighbour : ";
+        cout<<"Node: "<<node.first<<" Neighbour: ";
         for(auto neighbour : node.second)
         {
             cout<<neighbour<<" ";
         }
-        cout<<endl;
+        cout<<"\n";
     }
 }
-
 
