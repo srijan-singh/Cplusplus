@@ -19,3 +19,19 @@ Level 2
 Level 3
 
 [Advance](Data%20Structures/4%20Advance)
+
+<h2>Algorithms</h2>
+
+[Searching](Algorithm/Searching)
+
+[Sorting](Algorithm/Sorting)
+
+<h2>Cryptography</h2>
+
+[Monoalphabetc](Practical/Cryptography/Monoalphabetic_cypher.cpp)
+
+[Play Fare](Practical/Cryptography/Play_Fare_5x5.cpp)
+
+[Hill Cifer](Practical/Cryptography/hill_cipher.cpp)
+
+[Vernam](Practical/Cryptography/vernam.cpp)
