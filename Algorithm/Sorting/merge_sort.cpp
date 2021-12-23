@@ -1,3 +1,5 @@
+//Merge Sort
+
 #include <iostream>
 
 void display(int arr[], int lenght)

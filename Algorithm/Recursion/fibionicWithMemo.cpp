@@ -1,49 +1,33 @@
-#include <iostream>
+#include<iostream>
+#include<unordered_map>
 
+using std::unordered_map;
 using std::cout;
 
-class Fibonaci {
 
-  int * memo;
-    
-public:
-    
-    int getFibNumber(int n) {
+unsigned long fib(long num, unordered_map <unsigned long, unsigned long> &Dict)
+{
+  if (Dict.find(num) != Dict.end())
+  {
+    return Dict[num];
+  }
 
-      memo = new int[n+1];
-      return fib_memo(n, memo);
+  if (num <= 2)
+  {
+    return 1;
+  }
 
-    }
+  Dict[num] = fib(num-1, Dict) + fib(num-2, Dict);
 
-    int fib_memo(int n, int memo[])
-    {
-      if (n==0 or n==1)
-      {
-        return n;
-      }
-
-      for(int i=0; i<n; i++)
-      {
-        if(n==memo[i])
-        {
-          return memo[n];
-        }
-      }
-
-      memo[n] = fib_memo(n-1, memo) + fib_memo(n-2, memo);
-
-      return memo[n];
-    }
-};
-
+  return Dict[num];
+}
 
 int main()
 {
-  Fibonaci s;
-
-  cout<<s.getFibNumber(8)<<"\n";
-  cout<<s.getFibNumber(9)<<"\n";
-  cout<<s.getFibNumber(10)<<"\n";
-
+  unsigned long n;
+  cout<<"Enter the number: ";
+  std::cin>>n;
+  unordered_map <unsigned long, unsigned long> Dict;
+  cout<<fib(n, Dict);
   return 0;
 }
