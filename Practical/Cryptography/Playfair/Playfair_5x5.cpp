@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class PlayFare
+class PlayFair
 {
     string temp_matrix[25];
     string matrix[5][5];
@@ -14,7 +14,7 @@ class PlayFare
     public:
 
     // Users Function
-    PlayFare(string keyword)
+    PlayFair(string keyword)
     {
         get_temp_matrix(keyword);
 
@@ -214,7 +214,7 @@ int main()
 {
     string str = "UNIVERSITY";
     string keyword = "COMPUTER";
-    PlayFare p(keyword);
+    PlayFair p(keyword);
     cout<<p.cypher(str);
     return 0;
 }
