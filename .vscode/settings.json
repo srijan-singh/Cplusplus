@@ -7,7 +7,10 @@
         "string": "cpp",
         "string_view": "cpp",
         "iosfwd": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "fstream": "cpp",
+        "ostream": "cpp",
+        "bitset": "cpp"
     },
     "workbench.settings.enableNaturalLanguageSearch": false,
     "json.schemaDownload.enable": false,

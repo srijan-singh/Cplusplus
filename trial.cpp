@@ -1,32 +1,15 @@
 #include<iostream>
-#include<unordered_set>
 
-using std::unordered_set;
-using std::cout;
+using namespace std;
 
-typedef unordered_set<int> Set;
-
-void jadoo(Set visited)
-{
-    
+template <typename T> T maximum(T elm1, T elm2){
+    return (elm1 > elm2) ? elm1 : elm2;
 }
-
-int set_size(Set visited, int count=0)
-{
-    if(visited.size() > 4)
-    {
-        return visited.size();
-    }
-
-    visited.insert(count);
-
-    return set_size(visited, ++count);
-}
-
 
 int main()
 {
-    Set visited;
-    cout<<set_size(visited);
-    return 0;
+    std::cout<<maximum(11, 12)<<std::endl;
+    std::cout<<maximum(11.1212, 12.21)<<std::endl;
+    std::cout<<maximum("hello", "world")<<std::endl;
+    return 0;   
 }
