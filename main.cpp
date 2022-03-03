@@ -1,130 +1,57 @@
 #include<iostream>
-#include<unordered_map>
-#include<unordered_set>
 #include<vector>
 
-using std::unordered_map;
-using std::unordered_set;
-using std::vector;
+using namespace std;
 
-using std::string;
-using std::to_string;
-using std::cout;
-using std::endl;
-
-typedef unordered_map<string ,vector<string>> Graph;
-typedef unordered_set<string> Set;
-typedef vector<vector<string>> Edge;
-
-void print(Graph);
-
-Graph get_graph(Edge);
-
-int dfs(Graph graph, string source, Set visited)
+int max_index(vector<int> arr, int index=0)
 {
-    if(visited.find(source) != visited.end())
-    {
-        cout<<source<<endl;
-        visited.insert(source);
+    int max = index;
+    int length = arr.size();
 
-        for(auto neighbour : graph[source])
+    for(int i=max+1; i<length; i++)
+    {
+        if(arr[max] < arr[i])
         {
-            return dfs(graph, neighbour, visited);
+            max = i;
         }
     }
-    return visited.size();   
-}
 
-int num_island(Edge edges)
-{
-    Set visited;
-    Graph graph = get_graph(edges);
-    int size = 0;
-    
-    for(auto node: graph)
+    if(max == index)
     {
-        //cout<<visited.size()<<endl;
-        size = dfs(graph, node.first, visited);
+        return -1;
     }
 
-    return size;
+    return max;
 }
 
-int set_size(Set set, int count=0)
+int best_time_to_sell(vector<int> arr)
 {
-    if(set.size()>4)
-    {
-        return set.size();
-    }
+    int max = 0;
 
-    string input = to_string(count);
-    set.insert(input);
-    
-    return set_size(set, ++count);
+    int length = arr.size();
+
+    vector<int> result(length, 0);  
+
+    for(int i=0; i<length; i++)
+    {
+        int max = max_index(arr, i);
+
+        if(max > -1)
+        {
+            result[i] = arr[max] - arr[i];
+        }
+    }
+     
+    max = max_index(result);
+
+    return result[max];
 }
+
 int main()
 {
-    Edge edge = {
-        {"a","b"},
-        /*
-        {"d","c"},
-        {"d","e"},
-        {"d","f"},
-        {"d","g"},
-        */
-        {"c","d"},
-        {"e","d"},
-        {"f","d"},
-        {"g","d"},
-        {"j","d"},
-        {"h","i"},
-        //{"j","l"},
-        //{"z", "y"}
-    };
+    vector<int> arr = {7,1,5,3,6,4};
 
-    Set set;
+    cout<<best_time_to_sell(arr);
 
-    //cout<<set_size(set);
-
-    cout<<num_island(edge);
     return 0;
 }
-
-Graph get_graph(Edge edges)
-{
-    Graph graph;
-    for(auto edge : edges)
-    {
-        string a = edge[0], b = edge[1];
-
-        if(graph.find(a) == graph.end())
-        {
-            graph[a];
-        }
-
-        if(graph.find(b) == graph.end())
-        {
-            graph[b];
-        }
-
-        graph[a].push_back(b);
-        graph[b].push_back(a);
-
-    }
-    return graph;
-}
-
-void print(Graph graph)
-{
-    for(auto node : graph)
-    {
-        cout<<"Node: "<<node.first<<" Neighbour : ";
-        for(auto neighbour : node.second)
-        {
-            cout<<neighbour<<" ";
-        }
-        cout<<endl;
-    }
-}
-
-
