@@ -30,11 +30,11 @@ Here *‘x’* is the bogus letter.
 
 2. If the letter is standing alone in the process of pairing, then add an extra bogus letter with the alone letter
 
-**Plain Text:** “helloe”
+        Plain Text: “helloe”
 
-**AfterSplit:** ‘he’ ‘lx’ ‘lo’ ‘ex’
+        After Split: ‘he’ ‘lx’ ‘lo’ ‘ex’
 
-Here ‘x’  is the bogus letter.
+Here *‘x’* is the bogus letter.
 
 ## Rules for Encryption: 
  
